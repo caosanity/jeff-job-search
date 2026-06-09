@@ -21,7 +21,6 @@ Update this section whenever your resume changes. The script reads this directly
 ```
 NAME: Jeff Cao
 EMAIL: jeffcao88@outlook.com
-PHONE: (647) 961-8398
 
 CURRENT ROLE: Product Owner, Data Automation, Architecture, and A.I Pod — Canada Goose Holdings Inc. (April 2025–Present)
 - Owned full product lifecycle across two scrum teams (15+ developers) spanning Data Engineering and Systems Integration
