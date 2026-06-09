@@ -43,3 +43,4 @@ jobs:
         with:
           name: job-search-log
           path: logs/job_search.log
+
