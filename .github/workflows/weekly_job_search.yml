@@ -1,0 +1,45 @@
+name: Weekly Job Search Digest
+
+on:
+  schedule:
+    # 9:00 AM ET = 14:00 UTC (EST winter) / 13:00 UTC (EDT summer)
+    # Running at 13:00 UTC covers EDT (summer); adjust to 14:00 for EST (winter)
+    - cron: "0 13 * * 6"   # Every Saturday at 13:00 UTC (9:00 AM EDT)
+
+  # Allow manual trigger from GitHub Actions UI
+  workflow_dispatch:
+
+jobs:
+  job-search:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run job search
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          JSEARCH_API_KEY:   ${{ secrets.JSEARCH_API_KEY }}
+          ADZUNA_APP_ID:     ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_API_KEY:    ${{ secrets.ADZUNA_API_KEY }}
+          SMTP_HOST:         ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:         ${{ secrets.SMTP_PORT }}
+          SMTP_USER:         ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD:     ${{ secrets.SMTP_PASSWORD }}
+        run: python job_search.py
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-search-log
+          path: logs/job_search.log
