@@ -218,7 +218,7 @@ Rank by match_score descending. Return ONLY valid JSON — no markdown, no pream
             "content-type": "application/json",
         },
         json={
-            "model": "claude-sonnet-4-20250514",
+            "model": "claude-sonnet-4-6",
             "max_tokens": 2000,
             "messages": [{"role": "user", "content": prompt}],
         },
